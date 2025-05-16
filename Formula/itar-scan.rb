@@ -1,7 +1,7 @@
 # homebrew-itartools/Formula/itarscan.rb
-class Itarscan < Formula
+class ItarScan < Formula
   desc     "CLI scanner that detects ITAR-controlled source with a local LLM"
-  homepage "https://github.com/Fizzler-LLC/tech-data-scan-public"
+  homepage "https://github.com/Fizzler-LLC/homebrew-tech-data-scan-public"
   version  "0.1.0"
   license  "MIT"                           # ← or whatever license your code uses
 
