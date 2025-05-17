@@ -8,8 +8,8 @@ class ItarScan < Formula
   # ─── Binary + LoRA (PyInstaller output) ──────────────────────────
   on_macos do
     if Hardware::CPU.arm?
-      url     "https://github.com/brianfrechette3/tech-data-scan-public/releases/download/v0.1.0/itarscan-macos-arm64.tar.gz"                # e.g. https://github.com/yourorg/itar-scan/releases/download/v0.2.0/itarscan-macos-arm64.tar.gz
-      sha256  "7cbe4091f1ca5f8598a58233cd19d05b00e98a42364742dc7982d618954cae70"
+      url     "https://github.com/brianfrechette3/tech-data-scan-public/releases/download/v0.1.1/itarscan-macos-arm64.tar.gz"                # e.g. https://github.com/yourorg/itar-scan/releases/download/v0.2.0/itarscan-macos-arm64.tar.gz
+      sha256  "af3e76fa14ce9854a0f7bf2bc539ce02910a1f0f4ae7b6bf0868f6eca93930bd"
     else
       odie "Only Apple Silicon is supported at the moment."
     end
@@ -24,18 +24,25 @@ class ItarScan < Formula
   # No runtime dependencies: everything needed is baked into the PyInstaller binary.
   # If your code *imports* other shared libs at runtime, declare them here.
 
-  def install
-    # 1. Install the PyInstaller bundle (bin & libexec)
-    bin.install     "bin/itar-scan"             # thin wrapper you added
-    libexec.install "itar-scan"                 # the one-dir bundle
-    libexec.install "libexec"                   # contains empty models/
+  # def install
+  #   # 1. Install the PyInstaller bundle (bin & libexec)
+  #   bin.install     "bin/itar-scan"             # thin wrapper you added
+  #   libexec.install "itar-scan"                 # the one-dir bundle
+  #   libexec.install "libexec"                   # contains empty models/
 
-    # 2. Stage the GGUF into that libexec/models/ directory
+  #   # 2. Stage the GGUF into that libexec/models/ directory
+  #   (libexec/"models").mkpath
+  #   resource("phi3-base-model").stage do
+  #     cp Dir["Phi-3-mini-4k-instruct-q4.gguf"], libexec/"models"
+  #   end
+  # end
+  def install
+    libexec.install "itar-scan"            # one-dir bundle
+    bin.install_symlink libexec/"itar-scan" => "itar-scan"
     (libexec/"models").mkpath
-    resource("phi3-base-model").stage do
-      cp Dir["Phi-3-mini-4k-instruct-q4.gguf"], libexec/"models"
-    end
+    resource("phi3-base-model").stage { cp_r Dir["*"], libexec/"models" }
   end
+  
 
   def caveats
     <<~EOS
