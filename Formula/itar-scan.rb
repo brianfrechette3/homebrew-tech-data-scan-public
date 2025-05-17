@@ -9,7 +9,7 @@ class ItarScan < Formula
   on_macos do
     if Hardware::CPU.arm?
       url     "https://github.com/brianfrechette3/tech-data-scan-public/releases/download/v0.1.1/itarscan-macos-arm64.tar.gz"                # e.g. https://github.com/yourorg/itar-scan/releases/download/v0.2.0/itarscan-macos-arm64.tar.gz
-      sha256  "af3e76fa14ce9854a0f7bf2bc539ce02910a1f0f4ae7b6bf0868f6eca93930bd"
+      sha256  "9a22399e148a5f21cbc7fcc531c202172c9898988a928b4844e0885dd56a5160"
     else
       odie "Only Apple Silicon is supported at the moment."
     end
