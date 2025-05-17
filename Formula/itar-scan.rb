@@ -8,7 +8,7 @@ class ItarScan < Formula
   # ─── Binary + LoRA (PyInstaller output) ──────────────────────────
   on_macos do
     if Hardware::CPU.arm?
-      url     "https://github.com/brianfrechette3/tech-data-scan-public/releases/download/v0.1.1/itarscan-macos-arm64.tar.gz"                # e.g. https://github.com/yourorg/itar-scan/releases/download/v0.2.0/itarscan-macos-arm64.tar.gz
+      url     "https://github.com/brianfrechette3/tech-data-scan-public/releases/download/v0.1.2/itarscan-macos-arm64.tar.gz"                # e.g. https://github.com/yourorg/itar-scan/releases/download/v0.2.0/itarscan-macos-arm64.tar.gz
       sha256  "9a22399e148a5f21cbc7fcc531c202172c9898988a928b4844e0885dd56a5160"
     else
       odie "Only Apple Silicon is supported at the moment."
